@@ -92,15 +92,19 @@ resp: 0x16       0x1000000c   0x0 <- resp OP==0, previous operation (READ ADDR[0
 FPGA Utilization and Timing
 ===
 After generated FPGA bitstream, there are some reports under `fpgabs` directory.
-|File Name|Report Content|
-|---|---|
-|post_synth_util.rpt|FPGA Utilization after Synthesis phase|
-|post_place_util.rpt|FPGA Utilization after Placement phase|
-|post_route_timing_summary.rpt|Overall FPGA Timing Report after Routing phase|
+| File Name | Report Content |
+| --- | --- |
+| post_synth_util.rpt | FPGA Utilization after Synthesis phase |
+| post_place_util.rpt | FPGA Utilization after Placement phase |
+| post_route_timing_summary.rpt | Overall FPGA Timing Report after Routing phase |
+
+Brief summaries from Xilinx 2017.4 reports
+---
 
 From the FPGA utilization after placement, roughly used 65% FPGA CLB area.
+```
 |          Site Type         |  Used | Fixed | Available | Util% |
-|----------------------------|-------+-------|-----------|-------|
++----------------------------+-------+-------+-----------+-------+
 | Slice LUTs                 | 13449 |     0 |     20800 | 64.66 |
 |   LUT as Logic             | 12685 |     0 |     20800 | 60.99 |
 |   LUT as Memory            |   764 |     0 |      9600 |  7.96 |
@@ -110,6 +114,7 @@ From the FPGA utilization after placement, roughly used 65% FPGA CLB area.
 |   Register as Flip Flop    | 11137 |    12 |     41600 | 26.77 |
 |   Register as Latch        |     0 |     0 |     41600 |  0.00 |
 |   Register as AND/OR       |    12 |     0 |     41600 |  0.03 |
+```
 
 For the FPGA max-delay path after route, it's propagation time is 64.222ns. Because this core running at 10MHz (100ns), it's fine for this unpipelined design.
 ```
