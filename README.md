@@ -131,7 +131,7 @@ Slack (MET) :             64.222ns  (required time - arrival time)
                             (rising edge-triggered cell FDRE clocked by clk_out1_core_pll  {rise@0.000ns fall@50.000ns period=100.000ns})
 ```
 
-Simulation Waveform for Debug
+Simulate Waveform for Debugging
 ===
 
 Because this project use Non-Project mode to simplify the build process, there are some Project Mode files in [xprj_rv32i_arty project](https://github.com/watz0n/xprj_rv32i_arty) for [Xilinx Vivado 2017.4](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2017-4.html). The project respository has two back-end memory candidates, BRAM and DDR3. The BRAM project is built for quick simulation for RV32I core or JTAG module debug process, the DDR3 project is aimed to simulate overall system for learn-rv32i-arty project. 
