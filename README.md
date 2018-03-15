@@ -14,7 +14,7 @@ The first problem to move RISCV-32I design from ideal simulation to real world i
 
 The second problem is how to transfer executable code to Arty board from PC. If we minimize the Arty board, there are only 1 USB cable for USB-JTAG and USB-UART through on-board FT2232H bridge chip. In order to save USB-UART for human readable information in future design, the choice will be left with USB-JTAG port, which is Xilix/Digilent official FPGA configuration port, too. By Xilinx FPGA Configuration [(UG470)](https://www.xilinx.com/support/documentation/user_guides/ug470_7Series_Config.pdf) document, the official JTAG has USER1 to USER4 register for tranfering data between FPGA and PC. I choosed USER4 as interface, because USER1 would be allocated by Xilinx Debug ILA core as default.
 
-If you want to know the system internal architecture, please reference the [system overview](https://github.com/watz0n/learn-rv32i-arty/blob/master/doc/RV32I-Arty-DDR3-Overview.png) and blog post:[Port Chisel3 build RV32I Core on Arty Board] (TBD). Adhere, this README would only talk about how to use this project, focus on how to synthesis FPGA with pre-defined IPs and how to transfer data to Xilinx JTAG USER4 register via Xilinx xsdbserver. 
+If you want to know the system internal architecture, please reference the [system overview](https://github.com/watz0n/learn-rv32i-arty/blob/master/doc/RV32I-Arty-DDR3-Overview.png) and blog post: [Port Chisel3 build RV32I Core on Arty Board] (TBD). Adhere, this README would only talk about how to use this project, focus on how to synthesis FPGA with pre-defined IPs and how to transfer data to Xilinx JTAG USER4 register via Xilinx xsdbserver. 
 
 Usage Guide
 ===
