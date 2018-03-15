@@ -93,7 +93,7 @@ uint32_t dtmxsdb_t::do_command(dtmxsdb_t::req r)
     {
       sscanf(response, "okay %x %x %x\n", &ra, &rd, &ro);
 
-      if(log)
+      if(log&tmcnt) //when tmcnt==0, get req return data, always 0.
           printf("resp: 0x%02x 0x%08x 0x%01x\n", ra, rd, ro);
 
       if( (ra == r.addr) && (ro == 0x00)) {
@@ -104,7 +104,7 @@ uint32_t dtmxsdb_t::do_command(dtmxsdb_t::req r)
         return rd;
       }
       else {
-        if(tmcnt < tmout) {
+        if(tmcnt <= tmout) {
           // Send jtagd_dmi_resp
           if( send(sock , message , strlen(message) , 0) < 0)
           {

@@ -104,47 +104,25 @@ always@(posedge jclk or posedge dev_rst) begin //Use sub-optimal reset trigger, 
                         resp_avl <= 1'b0;
                         req_done <= 1'b0;
                         jresp_buf <= {JTAG_DATA_WIDTH{1'b0}};
+                        resp_data <= {RX_WIDTH{1'b0}};
+                        resp_addr <= {DMI_ADDR_WIDTH{1'b0}};
                     end
                 end
                 else begin
                     if(jreq_rdy) begin
-                        if(jreq_buf[DMI_OP_WIDTH-1:0] == 2'b01) begin //DMI_REQOP_RD = 2'h1;'
+                        if(jreq_buf[DMI_OP_WIDTH-1:0] == 2'b01) begin //DMI_REQOP_RD == 2'h1;'
                             jreq_vld <= 1'b1;
                             req_avl <= 1'b1;
                             resp_addr <= jreq_buf[(DMI_DATA_WIDTH+DMI_OP_WIDTH)+:DMI_ADDR_WIDTH];
                             jresp_buf[DMI_OP_WIDTH+:(DMI_ADDR_WIDTH+DMI_DATA_WIDTH)] <= {jreq_buf[(DMI_DATA_WIDTH+DMI_OP_WIDTH)+:DMI_ADDR_WIDTH], {DMI_DATA_WIDTH{1'b0}}};
                             jresp_buf[DMI_OP_WIDTH-1:0] <= 2'h3;
                         end
-                        else if(jreq_buf[DMI_OP_WIDTH-1:0] == 2'b10) begin //DMI_REQOP_WR = 2'h2;
+                        else if(jreq_buf[DMI_OP_WIDTH-1:0] == 2'b10) begin //DMI_REQOP_WR == 2'h2;
                             jreq_vld <= 1'b1;
                             req_avl <= 1'b1;
                             resp_addr <= jreq_buf[(DMI_DATA_WIDTH+DMI_OP_WIDTH)+:DMI_ADDR_WIDTH];
                             jresp_buf[DMI_OP_WIDTH+:(DMI_ADDR_WIDTH+DMI_DATA_WIDTH)] <= {jreq_buf[(DMI_DATA_WIDTH+DMI_OP_WIDTH)+:DMI_ADDR_WIDTH], {DMI_DATA_WIDTH{1'b0}}};
                             jresp_buf[DMI_OP_WIDTH-1:0] <= 2'h3;
-                        end
-                        else if(jreq_buf[DMI_OP_WIDTH-1:0] == 2'b00) begin //DMI_REQOP_NOP = 2'h0;'
-                            if(jresp_buf[DMI_OP_WIDTH-1:0] == 2'h2) begin
-                                jresp_buf <= {JTAG_DATA_WIDTH{1'b0}};
-                            end
-                            if(req_avl) begin
-                                jresp_buf[(DMI_DATA_WIDTH+DMI_OP_WIDTH)+:(DMI_ADDR_WIDTH)] = resp_addr;
-                                jresp_buf[DMI_OP_WIDTH-1:0] <= 2'h3;
-                            end
-                        end
-                    end
-                    else begin
-                        if(jreq_buf[DMI_OP_WIDTH-1:0] == 2'b00) begin //DMI_REQOP_NOP = 2'h0;'
-                            if(jresp_buf[DMI_OP_WIDTH-1:0] == 2'h2) begin
-                                jresp_buf <= {JTAG_DATA_WIDTH{1'b0}};
-                            end
-                            if(req_avl) begin
-                                jresp_buf[(DMI_DATA_WIDTH+DMI_OP_WIDTH)+:(DMI_ADDR_WIDTH)] = resp_addr;
-                                jresp_buf[DMI_OP_WIDTH-1:0] <= 2'h3;
-                            end
-                        end
-                        else begin
-                            jresp_buf[DMI_OP_WIDTH+:(DMI_ADDR_WIDTH+DMI_DATA_WIDTH)] <= jreq_buf[DMI_OP_WIDTH+:(DMI_ADDR_WIDTH+DMI_DATA_WIDTH)];
-                            jresp_buf[DMI_OP_WIDTH-1:0] <= 2'h2;
                         end
                     end
                 end
