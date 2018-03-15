@@ -131,6 +131,11 @@ Slack (MET) :             64.222ns  (required time - arrival time)
                             (rising edge-triggered cell FDRE clocked by clk_out1_core_pll  {rise@0.000ns fall@50.000ns period=100.000ns})
 ```
 
+Simulation Waveform for Debug
+===
+
+Because this project use Non-Project mode to simplify the build process, I've prepared Project Mode files in [xprj_rv32i_arty project](https://github.com/watz0n/xprj_rv32i_arty). There are two back-end memory candidates, BRAM and DDR3. The BRAM project is ready for quick simulation for RV32I core or JTAG module debug process, the DDR3 project is aim for simulating overall system from learn-rv32i-arty project. 
+
 TODO List
 ===
 * Document for this design detail, but after draft the learn-rv32i-assp document
