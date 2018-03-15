@@ -59,7 +59,7 @@ If you want to know more detail about Xilinx JTAG toolchain, please reference th
 
 Build Emulator and Run Testbench
 ---
-Assume project directory is `D:\FPGA\learn-rv32i-arty`, map to Bash on Windows is `/mnt/d/FPGA/learn-rv32i-arty`.
+Assume project directory is `D:\FPGA\learn-rv32i-arty`, map to Bash on Windows is `/mnt/d/FPGA/learn-rv32i-arty`. And the xsdbserver is host on the same computer.
 
 Open `Bash on Ubuntu on Windows`, and input below commands:
 ```
