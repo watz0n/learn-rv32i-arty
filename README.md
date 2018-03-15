@@ -92,6 +92,7 @@ resp: 0x16       0x1000000c   0x0 <- resp OP==0, previous operation (READ ADDR[0
 FPGA Utilization and Timing
 ===
 After generated FPGA bitstream, there are some reports under `fpgabs` directory.
+
 | File Name | Report Content |
 | --- | --- |
 | post_synth_util.rpt | FPGA Utilization after Synthesis phase |
