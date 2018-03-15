@@ -12,7 +12,7 @@ This FPGA RV32I core has the same RISC-V implementation as [learn-rv32i-asap pro
 
 The first problem to move RISCV-32I design from ideal simulation to real world is memory interface. From [learn-rv32i-asap project](https://github.com/watz0n/learn-rv32i-asap) design, this core needs 3-port interface form ideal Magic RAM. But, the Xilinx FPGA only support 2-port Block RAM and 1-to-mulit port Distribute RAM. It's sad that total usable RAM in FPGA is about 1.8M bits, but our testbench like qsort/rsort needs about 2M bytes to accommodate the executable code and processing data. Therefore, on-board DDR3 (256MB) is necessary for testbench. The choice of MIG AXI4 interface rather than Native MIG interface is for portability, this external memory could be replace by Block RAM with AXI4 interface with small effort.
 
-The second problem is how to transfer executable code to Arty board from PC. If we minimize the Arty board, there are only 1 USB cable for USB-JTAG and USB-UART through on-board FT2232H bridge chip. In order to save USB-UART for human readable information in future design, the choice will be left with USB-JTAG port, which is Xilix/Digilent official FPGA configuration port, too. By [Xilinx FPGA Configuration UG470](https://www.xilinx.com/support/documentation/user_guides/ug470_7Series_Config.pdf) document, the official JTAG has USER1 to USER4 register for tranfering data between FPGA and PC. I choosed USER4 as interface, because USER1 would be allocated by Xilinx Debug ILA core as default.
+The second problem is how to transfer executable code to Arty board from PC. If we minimize the Arty board, there are only 1 USB cable for USB-JTAG and USB-UART through on-board FT2232H bridge chip. In order to save USB-UART for human readable information in future design, the choice will be left with USB-JTAG port, which is Xilix/Digilent official FPGA configuration port, too. By Xilinx FPGA Configuration [(UG470)](https://www.xilinx.com/support/documentation/user_guides/ug470_7Series_Config.pdf) document, the official JTAG has USER1 to USER4 register for tranfering data between FPGA and PC. I choosed USER4 as interface, because USER1 would be allocated by Xilinx Debug ILA core as default.
 
 Adhere, this README would only talk about how to use this project, focus on how to synthesis FPGA with pre-defined IPs and how to transfer data to Xilinx JTAG USER4 register via Xilinx xsdbserver. If you want to know the usage of Xilinx JTAG toolchain, please reference the [arty-xjtag project](https://github.com/watz0n/arty_xjtag).
 
@@ -67,6 +67,8 @@ make dtmxsdb
 ...... # build information
 # run all test, asm-tests and bmarks-test
 make port=3333 arty-run
+157... [rv32ui-p-simple]:Success
+...... # other testbenches
 ```
 
 If you find anything wrong and want to have more detail, here is an manual execution example:
@@ -132,7 +134,7 @@ TODO List
 ===
 * Document for this design detail, but after draft the learn-rv32i-assp document
 * Pipelined RV32I core on FPGA with L1 I/D Cache
-* Interfacing peripheral by UART, SPI, I2C
+* Interfacing peripheral by new UART, SPI, I2C module
 * Display graphic information by [Digilent Pmod OLEDrgb](https://store.digilentinc.com/pmod-oledrgb-96-x-64-rgb-oled-display-with-16-bit-color-resolution/) 
 
 Contact Information
