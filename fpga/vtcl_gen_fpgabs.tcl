@@ -58,6 +58,7 @@ report_utilization -file $output_dir/post_place_util.rpt
 
 # [VTCL] Route FPGA design signal path on FPGA physical layout
 route_design
+phys_opt_design
 report_timing_summary -file $output_dir/post_route_timing_summary.rpt
 
 # [VTCL] Output FPGA bitstream for configuring FPGA part (Digilent Arty Board)
